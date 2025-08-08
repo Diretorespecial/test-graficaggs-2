@@ -1,9 +1,10 @@
 /* ======= Reset básico ======= */
 body {
   font-family: 'Nunito', sans-serif;
-  color: #384047;
+  color: #2c3e50;
   margin: 0;
   padding: 0;
+  background: #f5f9fc; /* fundo suave azul-claro */
 }
 
 /* ======= Layout principal ======= */
@@ -11,7 +12,7 @@ body {
   display: flex;
   gap: 20px;
   justify-content: center;
-  flex-wrap: wrap; /* permite quebrar no celular */
+  flex-wrap: wrap;
 }
 
 /* ======= Cabeçalho ======= */
@@ -37,31 +38,37 @@ body {
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  border: 2px solid #3498db;
 }
 
 /* ======= Formulário ======= */
 form {
-  background: #f4f7f8;
-  border-radius: 8px;
-  padding: 20px;
-  width: 100%;
-  max-width: 600px; /* controla no desktop */
-  box-sizing: border-box;
-}
-
-/* ======= Bloco de resultados ======= */
-.results {
-  background: #f4f7f8;
+  background: white;
   border-radius: 8px;
   padding: 20px;
   width: 100%;
   max-width: 600px;
   box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-top: 4px solid #3498db;
+}
+
+/* ======= Bloco de resultados ======= */
+.results {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-top: 4px solid #3498db;
 }
 
 /* ======= Avisos ======= */
 #avisos {
-  background: #fff8e1;
+  background: #eaf4fc;
+  border-left: 4px solid #3498db;
   border-radius: 8px;
   padding: 15px;
   width: 100%;
@@ -69,7 +76,7 @@ form {
   box-sizing: border-box;
 }
 
-/* ======= Ajuste para campos ======= */
+/* ======= Inputs e Selects ======= */
 input, select, textarea, button {
   width: 100%;
   padding: 10px;
@@ -78,19 +85,38 @@ input, select, textarea, button {
   border-radius: 4px;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* Remove a seta padrão do select */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: white;
+  background-image: none;
 }
 
 /* ======= Botão ======= */
 button {
-  background-color: #4bc970;
+  background-color: #3498db;
   color: white;
   font-size: 16px;
   cursor: pointer;
   border: none;
+  transition: background 0.3s ease;
 }
 
 button:hover {
-  background-color: #45b864;
+  background-color: #2980b9;
+}
+
+/* ======= Imagem Pix menor ======= */
+.pix img {
+  max-width: 120px;
+  height: auto;
+  display: block;
+  margin: 10px auto;
 }
 
 /* ======= Responsividade ======= */
