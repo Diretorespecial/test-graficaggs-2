@@ -11,26 +11,32 @@ function isMobile() {
 }
 
 function changeavisosheight() {
-    if(ispj) {
-      if (isMobile()) {
-        let height = 800;
-        $("#avisos").css("height", height + "px");
-      } else {
-        let height = 420;
-        $("#avisos").css("height", height + "px");
-      }
+  if (ispj) {
+    if (isMobile()) {
+      let height = 800;
+      $("#avisos").css("height", height + "px");
     } else {
-      if (isMobile()) {
-        let height = 720;
-        $("#avisos").css("height", height + "px");
-      } else {
-        let height = 380;
-        $("#avisos").css("height", height + "px");
-      }
+      let height = 420;
+      $("#avisos").css("height", height + "px");
     }
+  } else {
+    if (isMobile()) {
+      let height = 720;
+      $("#avisos").css("height", height + "px");
+    } else {
+      let height = 380;
+      $("#avisos").css("height", height + "px");
+    }
+  }
 }
 
 $(document).ready(function () {
+  // Inicialmente esconder prévias e botões
+  $(".results").hide();
+  $("#previa").hide();
+  $("#requisicao").hide();
+  $("#downloadBtn2").hide();
+  $("#downloadBtn3").hide();
 
   $(".radio").change(function () {
     if ($(this).val() == "tipo_amarelo") {
@@ -45,21 +51,37 @@ $(document).ready(function () {
   $("#qtd").change(function () {
     let valor = 0;
     switch ($(this).val()) {
-      case "1": valor = 100; break;
-      case "2": valor = 120; break;
-      case "3": valor = 130; break;
-      case "4": valor = 140; break;
-      case "5": valor = 150; break;
-      case "6": valor = 170; break;
-      case "10": valor = 210; break;
-      case "20": valor = 260; break;
+      case "1":
+        valor = 100;
+        break;
+      case "2":
+        valor = 120;
+        break;
+      case "3":
+        valor = 130;
+        break;
+      case "4":
+        valor = 140;
+        break;
+      case "5":
+        valor = 150;
+        break;
+      case "6":
+        valor = 170;
+        break;
+      case "10":
+        valor = 210;
+        break;
+      case "20":
+        valor = 260;
+        break;
     }
     $("#valor").val("R$ " + valor + ",00");
   });
 
   $("#pitxbtn").click(function () {
     navigator.clipboard.writeText(13641389000104).then(function () {
-      alert("Pitx copiado para a área de transferência!");
+      alert("Pix copiado para a área de transferência!");
     });
   });
 
@@ -116,23 +138,19 @@ $(document).ready(function () {
   });
 
   $("#generateDoc").click(function () {
-    if (!checkimputs()) {
-      return;
-    }
-
-    setTimeout(function () {
-      $("html, body").animate(
-        { scrollTop: $("#preview").offset().top },
-        800
-      );
-    }, 500);
+    if (!checkimputs()) return;
 
     $(".results").fadeIn(300);
-    $(".results").removeClass("hidden");
-    $(".result").removeClass("hidden");
+    $("#previa").fadeIn(300);
+    $("#requisicao").hide();
+    $("#downloadBtn2").hide();
+    $("#downloadBtn3").hide();
 
-    // Dados do formulário
-    let nome, crm, especialidade, endereco, telefone, bairro, cidade, cep, rg, numero, data, complemento, nomesocial, cpf, rua;
+    let docType = $("input[name='receituario']:checked").val();
+    let docPath = `assets/${docType}.png`;
+
+    let nome, crm, especialidade, endereco, telefone, bairro, cidade, cep, rg, numero, complemento, nomesocial, cpf, rua, data;
+
     if ($("#fisica").hasClass("inactive")) {
       nome = $("#razaoSocial").val();
       crm = $("#crmPJ").val();
@@ -167,26 +185,12 @@ $(document).ready(function () {
       data = $("#data").val();
     }
 
-    // Debug
-    if (isdebug) {
-      nome = "José Minelli";
-      nomesocial = "José Minelli";
-      crm = "123456";
-      especialidade = "Cardiologia";
-      endereco = "Rua Exemplo, 123";
-      telefone = "(11) 98765-4321";
-      bairro = "Centro";
-      complemento = "Apto 101";
-      cidade = "São Paulo";
-      cep = "12345-678";
-      rg = "12.345.678-9";
-      numero = "123";
-      cpf = "123.456.789-00";
-      data = "2023-10-01";
-    }
+    let dataFormatada = new Date(data);
+    let dia = dataFormatada.getDate().toString().padStart(2, "0");
+    let mes = dataFormatada.toLocaleString("default", { month: "long" });
+    let ano = dataFormatada.getFullYear();
 
-    let docType = $("input[name='receituario']:checked").val();
-    let docPath = `assets/${docType}.png`;
+    // ---------- PRÉVIA IMPRESSÃO ----------
     let canvas = document.createElement("canvas");
     let ctx = canvas.getContext("2d");
     let img = new Image();
@@ -197,11 +201,11 @@ $(document).ready(function () {
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0);
 
-      ctx.textAlign = "center";
       ctx.font = "50px 'TimesNewRoman', Times New Roman";
       ctx.fillStyle = "black";
+
       endereco = endereco + " " + numero + " - " + bairro;
-      telefone = telefone + " - " + cidade + " - " + "MG";
+      telefone = telefone + " - " + cidade + " - MG";
 
       if (docType == "tipo_amarelo") {
         ctx.fillText(nome, 1400, 160);
@@ -212,7 +216,6 @@ $(document).ready(function () {
         ctx.fillText(endereco, 1400, 255);
         ctx.fillText(telefone, 1400, 275);
       } else {
-        ctx.font = "60px 'TimesNewRoman', Times New Roman";
         ctx.fillText(nome, 1750, 160);
         ctx.font = "bold 35px Arial";
         ctx.fillText(especialidade, 1750, 200);
@@ -222,32 +225,62 @@ $(document).ready(function () {
         ctx.fillText(telefone, 1750, 350);
       }
 
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({
-        orientation: "landscape",
-        unit: "mm",
-        format: [960, 355],
-      });
-
       let imgData = canvas.toDataURL("image/png");
-      doc.addImage(imgData, "PNG", 0, 0, 960, 355);
-
-      let preview = document.getElementById("preview");
-      preview.src = imgData;
-
-      $("#previa").fadeIn(300);
-      $("#downloadBtn2")
-        .attr("href", doc.output("bloburl"))
-        .attr("download", "procuracao.pdf")
-        .show();
+      $("#preview").attr("src", imgData);
     };
 
-    // Requisição
-    let docPath3 = `assets/requisicao.png`;
+    // ---------- PROCURAÇÃO ----------
+    let procPath = docType == "tipo_amarelo" ? "assets/procuracao_a.png" : "assets/procuracao.png";
+    let canvas2 = document.createElement("canvas");
+    let ctx2 = canvas2.getContext("2d");
+    let img2 = new Image();
+    img2.src = procPath;
+
+    img2.onload = function () {
+      canvas2.width = img2.width;
+      canvas2.height = img2.height;
+      ctx2.drawImage(img2, 0, 0);
+
+      ctx2.font = "bold 40px Arial";
+      ctx2.fillStyle = "black";
+      ctx2.fillText(nome, 550, 450);
+      ctx2.font = "bold 35px Arial";
+      ctx2.fillText(rg, 680, 505);
+      ctx2.fillText(cpf, 100, 565);
+      ctx2.font = "bold 30px Arial";
+      ctx2.fillText(endereco, 100, 615);
+      ctx2.fillText(bairro, 100, 680);
+      ctx2.fillText(cidade, 800, 680);
+      ctx2.fillText(dia, 1025, 1100);
+      ctx2.fillText(mes, 1200, 1100);
+      ctx2.fillText("MG", 1450, 680);
+      ctx2.fillText(telefone, 1750, 300);
+
+      let { jsPDF } = window.jspdf;
+      let doc2 = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: [210, 297],
+      });
+
+      let imgData2 = canvas2.toDataURL("image/png");
+      doc2.addImage(imgData2, "PNG", 0, 0, 210, 297);
+
+      $("#preview2").attr("src", imgData2);
+      $("#downloadBtn2")
+        .attr("href", doc2.output("bloburl"))
+        .attr("download", "procuracao.pdf")
+        .show();
+      $("#previa").hide();
+      $("#requisicao").show();
+    };
+
+    // ---------- REQUISIÇÃO ----------
+    let reqPath = "assets/requisicao.png";
     let canvas3 = document.createElement("canvas");
     let ctx3 = canvas3.getContext("2d");
     let img3 = new Image();
-    img3.src = docPath3;
+    img3.src = reqPath;
 
     img3.onload = function () {
       canvas3.width = img3.width;
@@ -283,32 +316,27 @@ $(document).ready(function () {
         ctx3.fillText(cep, 1300, 890);
       }
 
-      const { jsPDF } = window.jspdf;
-      const doc2 = new jsPDF({
+      let { jsPDF } = window.jspdf;
+      let doc3 = new jsPDF({
         orientation: "portrait",
         unit: "mm",
         format: [210, 297],
       });
 
       let imgData3 = canvas3.toDataURL("image/png");
-      doc2.addImage(imgData3, "PNG", 0, 0, 210, 297);
+      doc3.addImage(imgData3, "PNG", 0, 0, 210, 297);
 
-      $("#requisicao").fadeIn(300);
+      $("#preview3").attr("src", imgData3);
       $("#downloadBtn3")
-        .attr("href", doc2.output("bloburl"))
+        .attr("href", doc3.output("bloburl"))
         .attr("download", "requisicao.pdf")
         .show();
-
-      let preview3 = document.getElementById("preview3");
-      preview3.src = imgData3;
     };
   });
 });
 
 function checkimputs() {
-  if (isdebug) {
-    return true;
-  }
+  if (isdebug) return true;
 
   let allFieldsFilled = true;
   let activeForm = ispj ? "#pjFields" : "#pfFields";
@@ -330,9 +358,6 @@ function checkimputs() {
     return false;
   }
 
-  if (!allFieldsFilled) {
-    return false;
-  }
-
+  if (!allFieldsFilled) return false;
   return true;
 }
