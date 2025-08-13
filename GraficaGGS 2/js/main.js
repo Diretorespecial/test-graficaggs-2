@@ -28,19 +28,16 @@ function changeavisosheight() {
         $("#avisos").css("height", height + "px");
       }
     }
-
 }
-
 
 $(document).ready(function () {
 
   $(".radio").change(function () {
-    
     if ($(this).val() == "tipo_amarelo") {
       $("#qtd").val("1");
       $("#valor").val("R$ 90,00");
       $("#qtd").attr("disabled", true);
-    }else{
+    } else {
       $("#qtd").attr("disabled", false);
     }
   });
@@ -48,30 +45,14 @@ $(document).ready(function () {
   $("#qtd").change(function () {
     let valor = 0;
     switch ($(this).val()) {
-      case "1":
-        valor = 100;
-        break;
-      case "2":
-        valor = 120;
-        break;
-      case "3":
-        valor = 130;
-        break;
-      case "4":
-        valor = 140;
-        break;
-      case "5":
-        valor = 150;
-        break;
-      case "6":
-        valor = 170;
-        break;
-      case "10":
-        valor = 210;
-        break;
-      case "20":
-        valor = 260;
-        break;
+      case "1": valor = 100; break;
+      case "2": valor = 120; break;
+      case "3": valor = 130; break;
+      case "4": valor = 140; break;
+      case "5": valor = 150; break;
+      case "6": valor = 170; break;
+      case "10": valor = 210; break;
+      case "20": valor = 260; break;
     }
     $("#valor").val("R$ " + valor + ",00");
   });
@@ -81,6 +62,7 @@ $(document).ready(function () {
       alert("Pitx copiado para a área de transferência!");
     });
   });
+
   $("#minimizar").click(function () {
     if (isminimized) {
       $("#avisos").removeClass("minimized");
@@ -96,19 +78,16 @@ $(document).ready(function () {
 
   $("#pjFields").hide();
 
-  
   $("#fisica").click(function () {
     $("#avisoP").html(
       `
-      ● Procuração, Requisição e Declaração (ambos gerados aqui) assinados no <a href="https://gov.br" target="_blank">gov.br</a>  <br>
-            ● CRM frente e verso.<br>
-            ● Declaração ou comprovante de endereço de atendimento em nome do médico (a Secretaria de Saúde aceita apenas contas de água, luz ou telefone) com até 90 dias de emissão.</span> <br>
+      ● Procuração e Requisição (ambos gerados aqui) assinados no <a href="https://gov.br" target="_blank">gov.br</a>  <br>
+      ● CRM frente e verso.<br>
+      ● Declaração ou comprovante de endereço de atendimento em nome do médico (a Secretaria de Saúde aceita apenas contas de água, luz ou telefone) com até 90 dias de emissão.
       `
     );
-    
     $("#pjFields").fadeOut(300, function () {
       $("#pfFields").fadeIn(300);
-     
     });
     ispj = false;
     ispf = true;
@@ -128,7 +107,6 @@ $(document).ready(function () {
     );
     $("#pfFields").fadeOut(300, function () {
       $("#pjFields").fadeIn(300);
-     
     });
     ispj = true;
     ispf = false;
@@ -141,11 +119,10 @@ $(document).ready(function () {
     if (!checkimputs()) {
       return;
     }
+
     setTimeout(function () {
       $("html, body").animate(
-        {
-          scrollTop: $("#preview").offset().top,
-        },
+        { scrollTop: $("#preview").offset().top },
         800
       );
     }, 500);
@@ -154,26 +131,8 @@ $(document).ready(function () {
     $(".results").removeClass("hidden");
     $(".result").removeClass("hidden");
 
-    let docType = $("input[name='receituario']:checked").val();
-    let docPath = `assets/${docType}.png`;
-
-    var nome,
-      crm,
-      especialidade,
-      endereco,
-      telefone,
-      bairro,
-      cidade,
-      cep,
-      rg,
-      numero,
-      data,
-      valor,
-      complemento,
-      nomesocial,
-      cpf;
-      rua;
-
+    // Dados do formulário
+    let nome, crm, especialidade, endereco, telefone, bairro, cidade, cep, rg, numero, data, complemento, nomesocial, cpf, rua;
     if ($("#fisica").hasClass("inactive")) {
       nome = $("#razaoSocial").val();
       crm = $("#crmPJ").val();
@@ -208,6 +167,7 @@ $(document).ready(function () {
       data = $("#data").val();
     }
 
+    // Debug
     if (isdebug) {
       nome = "José Minelli";
       nomesocial = "José Minelli";
@@ -223,15 +183,10 @@ $(document).ready(function () {
       numero = "123";
       cpf = "123.456.789-00";
       data = "2023-10-01";
-      // docType = "tipo_amarelo";
-      docPath = `assets/${docType}.png`;
     }
 
-    let dataFormatada = new Date(data);
-    let dia = dataFormatada.getDate().toString().padStart(2, "0");
-    let mes = dataFormatada.toLocaleString("default", { month: "long" });
-    let ano = dataFormatada.getFullYear();
-
+    let docType = $("input[name='receituario']:checked").val();
+    let docPath = `assets/${docType}.png`;
     let canvas = document.createElement("canvas");
     let ctx = canvas.getContext("2d");
     let img = new Image();
@@ -242,14 +197,12 @@ $(document).ready(function () {
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0);
 
-      ctx.font = "24px Arial";
-      ctx.fillStyle = "black";
-
-      // Adiciona os dados no canvas
       ctx.textAlign = "center";
       ctx.font = "50px 'TimesNewRoman', Times New Roman";
-      endereco =  endereco + " " + numero + " - " + bairro ;
+      ctx.fillStyle = "black";
+      endereco = endereco + " " + numero + " - " + bairro;
       telefone = telefone + " - " + cidade + " - " + "MG";
+
       if (docType == "tipo_amarelo") {
         ctx.fillText(nome, 1400, 160);
         ctx.font = "bold 30px Arial";
@@ -277,125 +230,20 @@ $(document).ready(function () {
       });
 
       let imgData = canvas.toDataURL("image/png");
-
       doc.addImage(imgData, "PNG", 0, 0, 960, 355);
 
       let preview = document.getElementById("preview");
       preview.src = imgData;
+
+      $("#previa").fadeIn(300);
+      $("#downloadBtn2")
+        .attr("href", doc.output("bloburl"))
+        .attr("download", "procuracao.pdf")
+        .show();
     };
 
-if (docType == "tipo_amarelo") {
-      let docPath2 = `assets/procuracao_a.png`;
-
-      let canvas2 = document.createElement("canvas");
-      let ctx2 = canvas2.getContext("2d");
-      let img2 = new Image();
-      img2.src = docPath2;
-
-      img2.onload = function () {
-        canvas2.width = img2.width;
-        canvas2.height = img2.height;
-        ctx2.drawImage(img2, 0, 0);
-
-        ctx2.font = "bold 40px Arial";
-        ctx2.fillStyle = "black";
-
-        // Adiciona os dados no canvas
-        ctx2.fillText(nome, 650, 820);
-
-        ctx2.font = "bold 35px Arial";
-        ctx2.fillText(rg, 1000, 900);
-        ctx2.fillText(cpf, 100, 980);
-        ctx2.font = "bold 35px Arial";
-        ctx2.fillText(endereco, 100, 1090);
-        ctx2.fillText(cidade, 1700, 1090);
-        ctx2.fillText("MG", 300, 1190);
-        ctx2.fillText(dia, 1680, 1840);
-        ctx2.fillText(mes, 1870, 1840);
-        ctx2.fillText(cidade, 1200, 1840);
-        ctx2.font = "43px Arial";
-        ctx2.fillText(ano, 2200, 1843);
-        // ctx2.fillText(bairro, 100, 730);
-        // ctx2.fillText(endereco, 100, 665);
-        // ctx2.fillText(endereco, 100, 665);
-        // ctx2.fillText(telefone, 1750, 350);
-
-        const { jsPDF } = window.jspdf;
-        const doc2 = new jsPDF({
-          orientation: "portrait",
-          unit: "mm",
-          format: [210, 297],
-        });
-
-        let imgData2 = canvas2.toDataURL("image/png");
-
-        doc2.addImage(imgData2, "PNG", 0, 0, 210, 297);
-
-        $("#downloadBtn2")
-          .attr("href", doc2.output("bloburl"))
-          .attr("download", "procuracao.pdf")
-          .show();
-
-        let preview2 = document.getElementById("preview2");
-        preview2.src = imgData2;
-      };
-    } else {
-      let docPath2 = `assets/procuracao.png`;
-
-      let canvas2 = document.createElement("canvas");
-      let ctx2 = canvas2.getContext("2d");
-      let img2 = new Image();
-      img2.src = docPath2;
-
-      img2.onload = function () {
-        canvas2.width = img2.width;
-        canvas2.height = img2.height;
-        ctx2.drawImage(img2, 0, 0);
-
-        ctx2.font = "bold 40px Arial";
-        ctx2.fillStyle = "black";
-
-        // Adiciona os dados no canvas
-        ctx2.fillText(nome, 550, 450);
-
-        ctx2.font = "bold 35px Arial";
-        ctx2.fillText(rg, 680, 505);
-        ctx2.fillText(cpf, 100, 565);
-        ctx2.font = "bold 30px Arial";
-        ctx2.fillText(endereco, 100, 615);
-        ctx2.fillText(bairro, 100, 680);
-        ctx2.fillText(endereco, 100, 615);
-        ctx2.fillText(cidade, 800, 680);
-        ctx2.fillText(endereco, 100, 615);
-        ctx2.fillText(dia, 1025, 1100);
-        ctx2.fillText(mes, 1200, 1100);
-        ctx2.fillText("MG", 1450, 680);
-        ctx2.fillText(telefone, 1750, 300);
-
-        const { jsPDF } = window.jspdf;
-        const doc2 = new jsPDF({
-          orientation: "portrait",
-          unit: "mm",
-          format: [210, 297],
-        });
-
-        let imgData2 = canvas2.toDataURL("image/png");
-
-        doc2.addImage(imgData2, "PNG", 0, 0, 210, 297);
-
-        $("#downloadBtn2")
-          .attr("href", doc2.output("bloburl"))
-          .attr("download", "procuracao.pdf")
-          .show();
-
-        let preview2 = document.getElementById("preview2");
-        preview2.src = imgData2;
-      };
-    }
-
-
+    // Requisição
     let docPath3 = `assets/requisicao.png`;
-
     let canvas3 = document.createElement("canvas");
     let ctx3 = canvas3.getContext("2d");
     let img3 = new Image();
@@ -404,7 +252,6 @@ if (docType == "tipo_amarelo") {
     img3.onload = function () {
       canvas3.width = img3.width;
       canvas3.height = img3.height;
-
       ctx3.drawImage(img3, 0, 0);
 
       ctx3.font = "bold 30px Arial";
@@ -435,58 +282,6 @@ if (docType == "tipo_amarelo") {
         ctx3.fillText(bairro, 760, 890);
         ctx3.fillText(cep, 1300, 890);
       }
-      var qtd = $("#qtd").val();
-      switch (qtd) {
-        case "1":
-          valor = 100;
-          break;
-        case "2":
-          valor = 120;
-          break;
-        case "6":
-          valor = 170;
-          break;
-        case "10":
-          valor = 210;
-          break;
-      }
-
-      $("#valor").val("R$" + valor + ",00");
-      switch (docType) {
-        case "tipo_b2":
-          $("#requisicao").show();
-          ctx3.fillText("X", 172, 1463);
-
-          break;
-        case "tipo_b":
-          1328;
-          $("#requisicao").show();
-          ctx3.fillText("X", 172, 1328);
-
-          break;
-        case "retinoides":
-          $("#requisicao").show();
-          ctx3.fillText("X", 172, 1593);
-
-          break;
-        case "tipo_amarelo":
-          $("#qtd").val("1");
-          $("#valor").val("R$100,00");
-         $("#previa").removeClass("hidden").fadeIn(300);
-
-      }
-
-  
-
-      let dataFormatada3 = new Date(data);
-      let dia3 = dataFormatada3.getDate().toString().padStart(2, "0");
-      let mes3 = dataFormatada3.toLocaleString("default", { month: "2-digit" });
-      let ano3 = dataFormatada3.getFullYear();
-      let FormData = `${dia3}/${mes3}/${ano3}`;
-
-      ctx3.fillText(FormData, 200, 2140);
-      ctx3.font = "bold 25px Arial";
-      ctx3.fillText(crm, 1350, 2140);
 
       const { jsPDF } = window.jspdf;
       const doc2 = new jsPDF({
@@ -496,9 +291,9 @@ if (docType == "tipo_amarelo") {
       });
 
       let imgData3 = canvas3.toDataURL("image/png");
-
       doc2.addImage(imgData3, "PNG", 0, 0, 210, 297);
 
+      $("#requisicao").fadeIn(300);
       $("#downloadBtn3")
         .attr("href", doc2.output("bloburl"))
         .attr("download", "requisicao.pdf")
@@ -507,67 +302,6 @@ if (docType == "tipo_amarelo") {
       let preview3 = document.getElementById("preview3");
       preview3.src = imgData3;
     };
- let docPath4 = `assets/declaracao.png`;
-
-let canvas4 = document.createElement("canvas");
-let ctx4 = canvas4.getContext("2d");
-let img4 = new Image();
-img4.src = docPath4;
-
-
-
-img4.onload = function () {
-  canvas4.width = img4.width;
-  canvas4.height = img4.height;
-  ctx4.drawImage(img4, 0, 0);
-
-  ctx4.font = "28px Arial";
-  ctx4.fillStyle = "black";
-
-  // Texto principal
-  ctx4.fillText(nome, 208, 358);
-  ctx4.fillText(cpf, 280, 428);
-  ctx4.fillText(rg, 1012, 421);
-  ctx4.fillText(especialidade, 200, 564);
-
-  // Endereço comercial
-  let enderecoCompleto = `${endereco}, ${numero} - ${complemento} - ${bairro} - ${cidade} - ${cep}`;
-  ctx4.font = "22px Arial";
-  ctx4.fillText(enderecoCompleto, 152, 636);
-
-  // Cidade fixa e data
-  ctx4.font = "22px Arial";
-  ctx4.fillText("Belo Horizonte", 446, 1710);
-  ctx4.fillText(dia, 606, 775);  // Dia
-  ctx4.fillText(mes, 772, 775); // Mês
-  ctx4.fillText(ano, 962, 775); // Ano
-
-   ctx4.fillText(dia, 949, 1716);  // Dia
-ctx4.fillText(mes, 1097, 1716); // Mês
-ctx4.fillText(ano, 1250, 1716); // Ano
-
-
-  const { jsPDF } = window.jspdf;
-  const doc4 = new jsPDF({
-    orientation: "portrait",
-    unit: "mm",
-    format: [210, 297],
-  });
-
-  let imgData4 = canvas4.toDataURL("image/png");
-
-  doc4.addImage(imgData4, "PNG", 0, 0, 210, 297);
-
-  $("#downloadBtn4")
-    .attr("href", doc4.output("bloburl"))
-    .attr("download", "declaracao.pdf")
-    .show();
-
-  $("#preview4").attr("src", imgData4);
-  $("#declaracao").show();
-};
-
-
   });
 });
 
@@ -592,7 +326,6 @@ function checkimputs() {
 
   if (!$("input[name='receituario']:checked").val()) {
     allFieldsFilled = false;
-
     alert("Por favor, selecione um tipo de receituário.");
     return false;
   }
