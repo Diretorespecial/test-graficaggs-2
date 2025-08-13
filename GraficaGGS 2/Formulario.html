@@ -8,7 +8,6 @@
       rel="stylesheet"
       type="text/css"
     />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,13 +15,13 @@
       rel="stylesheet"
     />
     <link rel="icon" type="image/png" href="images/favicon.png" />
-
     <link rel="stylesheet" href="css/main.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
     <div class="header">
       <img src="images/logo.png" alt="" />
-
       <div class="user">
         <span id="message">Seja bem vindo</span>
         <b><span id=></span></b>
@@ -34,320 +33,218 @@
         />
       </div>
     </div>
+
     <div class="row">
       <div id="avisos">
-        
         <div class="aviso" id="aviso1">
           <h2>Aviso</h2>
-          <h4>Os V4documentos gerados aqui devem ser enviados no WhatsApp do número <br><i>+55 31 98743-5878</i> junto de:</h4>
+          <h4>
+            Os documentos gerados aqui devem ser enviados no WhatsApp do número
+            <br /><i>+55 31 98743-5878</i> junto de:
+          </h4>
           <p id="avisoP">
-            ● Procuração, Requisição e Declaração (ambos gerados aqui) assinados no <a href="https://gov.br" target="_blank">gov.br</a>  <br>
-            ● CRM frente e verso.<br>
-            ● Declaração ou comprovante de endereço de atendimento em nome do médico (a Secretaria de Saúde aceita apenas contas de água, luz ou telefone) com até 90 dias de emissão.    
+            ● Procuração e Requisição (gerados aqui) assinados no
+            <a href="https://gov.br" target="_blank">gov.br</a><br />
+            ● CRM frente e verso.<br />
+            ● Declaração ou comprovante de endereço de atendimento em nome do
+            médico (a Secretaria de Saúde aceita apenas contas de água, luz ou
+            telefone) com até 90 dias de emissão.
+          </p>
         </div>
       </div>
-      <div class="conatiner">
 
+      <div class="conatiner">
         <form action="index.html" method="post">
           <h1>Formulário de Receituários</h1>
 
           <div class="personType">
             <button type="button" id="fisica">Pessoa Física</button>
-            <button type="button" class="inactive" id="juridica">
-              Pessoa Jurídica
-            </button>
+            <button type="button" class="inactive" id="juridica">Pessoa Jurídica</button>
           </div>
-<fieldset>
+
+          <fieldset>
             <legend><span class="number">1</span>Tipo de Receituário</legend>
             <div class="radioDiv">
-              <label
-                ><input
-                  type="radio"
-                  name="receituario"
-                  value="retinoides"
-                />
-                Retinóides</label
-              >
-              <label
-                ><input class="radio" type="radio" name="receituario" value="tipo_b" /> Tipo
-                B</label
-              >
-              <label
-                ><input class="radio" type="radio" name="receituario" value="tipo_b2" /> Tipo
-                B2</label
-              >
-              <label
-                ><input class="radio" type="radio" name="receituario" value="tipo_amarelo" />
-                Tipo Amarelo</label
-              >
+              <label>
+                <input type="radio" name="receituario" value="retinoides" /> Retinóides
+              </label>
+              <label>
+                <input class="radio" type="radio" name="receituario" value="tipo_b" /> Tipo B
+              </label>
+              <label>
+                <input class="radio" type="radio" name="receituario" value="tipo_b2" /> Tipo B2
+              </label>
+              <label>
+                <input class="radio" type="radio" name="receituario" value="tipo_amarelo" /> Tipo Amarelo
+              </label>
             </div>
           </fieldset>
-          <legend><span class="number">2</span>Informações</legend>
-          <div class="form-group">
-            
-            <!-- Campos Pessoa Física -->
-            <div id="pfFields">
-              <div>
+
+          <fieldset>
+            <legend><span class="number">2</span>Informações</legend>
+            <div class="form-group">
+              <div id="pfFields">
+                <!-- Campos Pessoa Física -->
                 <div class="input-group">
                   <label for="name">Nome do(a) Profissional:</label>
-                  <input type="text" id="nameform" name="user_name"required />
+                  <input type="text" id="nameform" name="user_name" required />
                 </div>
-
                 <div class="input-group">
                   <label for="nome_social">Nome Social:</label>
-                  <input type="text" id="nome_social" name="nome_social"required />
+                  <input type="text" id="nome_social" name="nome_social" required />
                 </div>
-              </div>
-              <div>
                 <div class="input-group">
                   <label for="crm">CRM / CRMV / CRO <span>(identificar tipo)</span> :</label>
-                  <input type="text" id="crm" name="crm"
-                  required />
+                  <input type="text" id="crm" name="crm" required />
                 </div>
-
                 <div class="input-group">
                   <label for="especialidade">Especialidade Médica:</label>
-                  <input type="text" id="especialidade" name="especialidade"
-                  required />
+                  <input type="text" id="especialidade" name="especialidade" required />
                 </div>
-              </div>
-              <div>
                 <div class="input-group">
                   <label for="telefone">Telefone:</label>
-                  <input type="text" id="telefone" name="telefone"
-                  required />
+                  <input type="text" id="telefone" name="telefone" required />
                 </div>
-
                 <div class="input-group">
                   <label for="cep">CEP:</label>
-                  <input type="text" id="cep" name="cep"
-                  required />
+                  <input type="text" id="cep" name="cep" required />
                 </div>
-              </div>
-              <div class="input-group">
-                <label for="rua">Rua/Av:</label>
-                 <input type="text" id="rua" name="rua" required />
-                 </div>
-              <div>
+                <div class="input-group">
+                  <label for="rua">Rua/Av:</label>
+                  <input type="text" id="rua" name="rua" required />
+                </div>
                 <div class="input-group">
                   <label for="numero">Número:</label>
-                  <input type="text" id="numero" name="numero"
-                  required />
+                  <input type="text" id="numero" name="numero" required />
                 </div>
-
                 <div class="input-group">
                   <label for="complemento">Complemento:</label>
-                  <input type="text" id="complemento" name="complemento" 
-                  />
+                  <input type="text" id="complemento" name="complemento" />
                 </div>
-              </div>
-              <div>
                 <div class="input-group">
                   <label for="cidade">Cidade:</label>
-                  <input type="text" id="cidade" name="cidade"
-                  required />
+                  <input type="text" id="cidade" name="cidade" required />
                 </div>
-
                 <div class="input-group">
                   <label for="bairro">Bairro:</label>
-                  <input type="text" id="bairro" name="bairro" 
-                  required/>
+                  <input type="text" id="bairro" name="bairro" required />
                 </div>
-              </div>
-              <div>
                 <div class="input-group">
                   <label for="cpf">CPF:</label>
-                  <input type="text" id="cpf" name="cpf" 
-                  required/>
+                  <input type="text" id="cpf" name="cpf" required />
                 </div>
-
                 <div class="input-group">
                   <label for="rg">RG:</label>
-                  <input type="text" id="rg" name="rg" 
-                  required/>
+                  <input type="text" id="rg" name="rg" required />
+                </div>
+                <div class="input-group">
+                  <label for="endereco">Endereço Comercial:</label>
+                  <input type="text" class="endereco" id="endereco" name="endereco" required />
+                </div>
+                <div class="input-group">
+                  <label for="data">Data:</label>
+                  <input type="date" class="data" id="data" name="data" required />
                 </div>
               </div>
-              <div>
-                <label for="endereco">Endereço Comercial:</label>
-                <input
-                  type="text"
-                  class="endereco"
-                  id="endereco"
-                  name="endereco"
-                  required
-                />
-              </div>
-              <div>
-                <label for="data">Data:</label>
-                <input
-                  type="date"
-                  class="data"
-                  id="data"
-                  name="data"
-                  required
-                />
-              </div>
-            </div>
 
-            <!-- Campos Pessoa Jurídica -->
-            <div id="pjFields">
-              <div>
+              <div id="pjFields">
+                <!-- Campos Pessoa Jurídica -->
                 <div class="input-group">
                   <label for="razao_social">Razão Social:</label>
-                  <input type="text" id="razaoSocial" name="razao_social"
-                  required />
+                  <input type="text" id="razaoSocial" name="razao_social" required />
                 </div>
                 <div class="input-group">
                   <label for="cnpj">CNPJ:</label>
-                  <input type="text" id="cnpj" name="cnpj"
-                  required />
+                  <input type="text" id="cnpj" name="cnpj" required />
                 </div>
-              </div>
-              <div>
                 <div class="input-group">
                   <label for="telefone_pj">Telefone:</label>
-                  <input type="text" id="telefonePJ" name="telefone_pj"
-                  required />
+                  <input type="text" id="telefonePJ" name="telefone_pj" required />
                 </div>
                 <div class="input-group">
-                <label for="rua">Rua/Av:</label>
-                <input type="text" id="rua" name="rua" required />
+                  <label for="rua">Rua/Av:</label>
+                  <input type="text" id="rua" name="rua" required />
                 </div>
                 <div class="input-group">
                   <label for="numero_pj">Número:</label>
-                  <input type="text" id="numero_pj" name="numero_pj"
-                  required />
+                  <input type="text" id="numero_pj" name="numero_pj" required />
                 </div>
-              </div>
-              <div>
                 <div class="input-group">
                   <label for="complemento_pj">Complemento:</label>
-                  <input
-                    type="text"
-                    id="complemento_pj"
-                    name="complemento_pj"
-                    
-                  />
+                  <input type="text" id="complemento_pj" name="complemento_pj" />
                 </div>
-
                 <div class="input-group">
                   <label for="cidade_pj">Cidade:</label>
-                  <input type="text" id="cidade_pj" name="cidade_pj" 
-                  required/>
+                  <input type="text" id="cidade_pj" name="cidade_pj" required />
                 </div>
-              </div>
-              <div>
                 <div class="input-group">
                   <label for="bairro_pj">Bairro:</label>
-                  <input type="text" id="bairro_pj" name="bairro_pj"
-                  required />
+                  <input type="text" id="bairro_pj" name="bairro_pj" required />
                 </div>
-
                 <div class="input-group">
                   <label for="cep_pj">CEP:</label>
-                  <input type="text" id="cep_pj" name="cep_pj"
-                  required />
+                  <input type="text" id="cep_pj" name="cep_pj" required />
                 </div>
-              </div>
-              <div>
                 <div class="input-group">
                   <label for="crm_pj">CRM / CRMV / CRO <span>(identificar tipo)</span> :</label>
-                  <input type="text" id="crmPJ" name="crm_pj" 
-                  required/>
+                  <input type="text" id="crmPJ" name="crm_pj" required />
                 </div>
-
                 <div class="input-group">
                   <label for="especialidade_pj">Especialidade Médica:</label>
-                  <input
-                    type="text"
-                    id="especialidadePJ"
-                    name="especialidade_pj"
-                    required
-                  />
+                  <input type="text" id="especialidadePJ" name="especialidade_pj" required />
                 </div>
-              </div>
-              <div>
-                <label for="endereco_pj">Endereço:</label>
-                <input
-                  type="text"
-                  class="endereco"
-                  id="enderecoPJ"
-                  name="endereco_pj"
-                  required
-                />
-              </div>
-              <div>
-                <label for="data">Data:</label>
-                <input
-                  type="date"
-                  class="data"
-                  id="data_pj"
-                  name="data"
-                  required
-                />
-              </div>
-              
-            </div>
-          </div>
-
-        
-          <fieldset>
-            <legend><span class="number">3</span>Quantidade e preço</legend>
-            <div>
-              <div class="input-group">
-                <label for="qtd">Quantidade (blocos)</label>
-                <select name="qtd" id="qtd" required>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="10">10</option>
-                </select>
-              </div>
-
-              <div class="input-group">
-                <label for="valor">Valor</label>
-                <input
-                  type="text"
-                  id="valor"
-                  name="valor"
-                  placeholder="R$ 100,00"
-                  pattern="^\d+(\.\d{1,2})?$"
-                  disabled
-                />
+                <div class="input-group">
+                  <label for="endereco_pj">Endereço:</label>
+                  <input type="text" class="endereco" id="enderecoPJ" name="endereco_pj" required />
+                </div>
+                <div class="input-group">
+                  <label for="data">Data:</label>
+                  <input type="date" class="data" id="data_pj" name="data_pj" required />
+                </div>
               </div>
             </div>
           </fieldset>
-          
+
+          <fieldset>
+            <legend><span class="number">3</span>Quantidade e preço</legend>
+            <div class="input-group">
+              <label for="qtd">Quantidade (blocos)</label>
+              <select name="qtd" id="qtd" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label for="valor">Valor</label>
+              <input type="text" id="valor" name="valor" placeholder="R$ 100,00" disabled />
+            </div>
+          </fieldset>
+
           <button id="generateDoc" type="button">Gerar documentos</button>
         </form>
+
         <div class="results hidden">
-          <div id="previa" class ="result hidden">
+          <div id="previa" class="result hidden">
             <h2 id="previaresult">Prévia da impressão</h2>
             <img id="preview" style="max-width: 300px; height: auto" />
             <br />
-  
           </div>
-          <div class ="result hidden">
-            <div id="declaracao" class="result hidden">
-              <h2>Prévia da Declaração</h2>
-              <img id="preview4" style="max-width: 300px; height: auto" />
-              <br />
-              <a id="downloadBtn4" download="declaracao.pdf">
-                <button>Baixar Documento</button>
-              </a>
-            </div>
-            
+
+          <div class="result hidden">
             <h2>Prévia da Procuração</h2>
             <img id="preview2" style="max-width: 300px; height: auto" />
             <br />
             <a id="downloadBtn2" download="imagem.png">
               <button>Baixar Documento</button>
             </a>
-          </div> 
-          <div id="requisicao" class ="result hidden">
+          </div>
+
+          <div id="requisicao" class="result hidden">
             <h2>Prévia da Requisição</h2>
             <img id="preview3" style="max-width: 300px; height: auto" />
             <br />
@@ -356,32 +253,21 @@
             </a>
           </div>
         </div>
- 
       </div>
+
       <div class="pix">
         <span>Lembre-se de enviar os documentos no WhatsApp <i>+55 31 8743-5878</i></span>
         <button id="pitxbtn">Copiar chave PIX</button>
-        <img src="images/qrcode.png">
+        <img src="images/qrcode.png" style="width:150px;height:auto;" />
         <span>Banco: <b>Inter</b></span>
         <span>Nome: <b>GRAFICA GGS LTDA</b></span>
         <h2>PIX</h2>
       </div>
     </div>
+
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
+    <script src="js/main.js"></script>
   </body>
-  <script
-    type="module"
-    src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
-  ></script>
-
-  
-  <script
-    type="module"
-    src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"
-  ></script>
-  <script
-    type="module"
-    src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"
-  ></script>
-  <script src="js/main.js"></script>
-
 </html>
