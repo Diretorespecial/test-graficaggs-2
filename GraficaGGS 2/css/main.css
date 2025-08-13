@@ -144,4 +144,13 @@ button:hover {
   #avisos {
     height: auto;
   }
+  .radioDiv {
+  display: flex;
+  flex-direction: column; /* mantém os radios empilhados */
+  gap: 8px; /* espaçamento entre eles */
+  padding: 0;
+  margin: 0;
 }
+
+}
+
