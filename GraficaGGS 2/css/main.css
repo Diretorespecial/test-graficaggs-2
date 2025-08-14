@@ -1,150 +1,147 @@
-/* Reset básico */
-body, h1, h2, h3, h4, h5, h6, p, div, span, input, button, select, label {
+/* ======= Reset básico ======= */
+body {
+  font-family: 'Nunito', sans-serif;
+  color: #2c3e50;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Nunito', sans-serif;
+  background: #f5f9fc; /* fundo suave azul-claro */
 }
 
-/* Container principal */
-body {
-  background: #f9f9f9;
-  padding: 20px;
-  color: #333;
-}
-
-/* Fieldset sem borda */
-fieldset {
-  border: none;
-  margin-bottom: 20px;
-  padding: 0;
-}
-
-/* Botões de tipo de pessoa */
-.personType {
+/* ======= Layout principal ======= */
+.conatiner {
   display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.personType button {
-  padding: 10px 20px;
-  border: 1px solid #999;
-  background: #fff;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-.personType button.inactive {
-  opacity: 0.5;
-}
-
-.personType button:hover {
-  background: #f0f0f0;
-}
-
-/* Tipo de receituário */
-.radioDiv {
-  display: flex;
+  gap: 20px;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 15px;
-  margin-top: 10px;
 }
 
-.radioDiv label {
+/* ======= Cabeçalho ======= */
+.header {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-  font-weight: 500;
-}
-
-/* Input group */
-.input-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-}
-
-.input-group label {
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-input[type="text"],
-input[type="date"],
-select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-/* Botão de gerar */
-#generateDoc {
-  margin-top: 20px;
-  padding: 12px 20px;
-  background-color: #007bff;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-#generateDoc:hover {
-  background-color: #0056b3;
-}
-
-/* Resultados */
-.results {
-  margin-top: 30px;
-}
-
-.result.hidden {
-  display: none;
-}
-
-.result img {
-  border: 1px solid #ccc;
-  padding: 5px;
-  background: #fff;
-  border-radius: 6px;
-  margin-bottom: 10px;
-}
-
-.result button {
-  padding: 10px 16px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.result button:hover {
-  background-color: #218838;
-}
-
-/* PIX area */
-.pix {
-  margin-top: 40px;
   padding: 15px;
-  border-top: 1px solid #ddd;
-  text-align: center;
 }
 
+.header img {
+  max-width: 200px;
+  height: auto;
+}
+
+.user {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.user img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid #3498db;
+}
+
+/* ======= Formulário ======= */
+form {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-top: 4px solid #3498db;
+}
+
+/* ======= Bloco de resultados ======= */
+.results {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-top: 4px solid #3498db;
+}
+
+/* ======= Avisos ======= */
+#avisos {
+  background: #eaf4fc;
+  border-left: 4px solid #3498db;
+  border-radius: 8px;
+  padding: 15px;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+}
+
+/* ======= Inputs e Selects ======= */
+input, select, textarea, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* Remove a seta padrão do select */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: white;
+  background-image: none;
+}
+
+/* ======= Botão ======= */
+button {
+  background-color: #3498db;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* ======= Imagem Pix menor ======= */
 .pix img {
-  max-width: 150px;
-  margin-top: 10px;
+  max-width: 120px;
+  height: auto;
+  display: block;
+  margin: 10px auto;
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
-  .personType {
-    flex-direction: column;
+/* ======= Responsividade ======= */
+@media screen and (max-width: 768px) {
+  .header img {
+    max-width: 150px;
   }
+  .user img {
+    width: 60px;
+    height: 60px;
+  }
+}
 
-  .radioDiv {
-    flex-direction: column;
+@media screen and (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+  .header img {
+    max-width: 120px;
+  }
+  .user img {
+    width: 50px;
+    height: 50px;
+  }
+  #avisos {
+    height: auto;
   }
 }
