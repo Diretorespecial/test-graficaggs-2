@@ -111,14 +111,6 @@ button:hover {
   background-color: #2980b9;
 }
 
-/* ======= Imagem Pix menor ======= */
-.pix img {
-  max-width: 120px;
-  height: auto;
-  display: block;
-  margin: 10px auto;
-}
-
 /* ======= Responsividade ======= */
 @media screen and (max-width: 768px) {
   .header img {
@@ -145,3 +137,4 @@ button:hover {
     height: auto;
   }
 }
+
