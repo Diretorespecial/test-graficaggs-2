@@ -2,23 +2,10 @@
 isdebug = false;
 
 isminimized = false;
-ispf = true;
-ispj = false;
 
 // Função pra verificar se é mobile
 function isMobile() {
   return /Mobi|Android/i.test(navigator.userAgent);
-}
-
-// Ajusta altura da área de avisos
-function changeavisosheight() {
-  let height;
-  if (ispj) {
-    height = isMobile() ? 800 : 420;
-  } else {
-    height = isMobile() ? 720 : 380;
-  }
-  $("#avisos").css("height", height + "px");
 }
 
 $(document).ready(function () {
@@ -68,43 +55,6 @@ $(document).ready(function () {
     isminimized = !isminimized;
   });
 
-  $("#pjFields").hide();
-
-  // Alternar pessoa física
-  $("#fisica").click(function () {
-    $("#avisoP").html(`
-      ● Procuração, Requisição e Declaração (ambos gerados aqui) assinados no <a href="https://gov.br" target="_blank">gov.br</a>  <br>
-      ● CRM frente e verso.<br>
-      ● Declaração ou comprovante de endereço de atendimento em nome do médico (a Secretaria de Saúde aceita apenas contas de água, luz ou telefone) com até 90 dias de emissão.<br>
-    `);
-    $("#pjFields").fadeOut(300, function () {
-      $("#pfFields").fadeIn(300);
-    });
-    ispj = false;
-    ispf = true;
-    changeavisosheight();
-    $("#juridica").addClass("inactive");
-    $("#fisica").removeClass("inactive");
-  });
-
-  // Alternar pessoa jurídica
-  $("#juridica").click(function () {
-    $("#avisoP").html(`
-      ● Procuração e Requisição (ambos gerados aqui) assinados no <a href="https://gov.br" target="_blank">gov.br</a>  <br>
-      ● CRM frente e verso.<br>
-      <b> ● Cartão CNPJ. -- adicional para pessoa jurídica<br> 
-      ● Certificado de regularidade.  -- adicional para pessoa jurídica<br> </b>
-    `);
-    $("#pfFields").fadeOut(300, function () {
-      $("#pjFields").fadeIn(300);
-    });
-    ispj = true;
-    ispf = false;
-    changeavisosheight();
-    $("#fisica").addClass("inactive");
-    $("#juridica").removeClass("inactive");
-  });
-
   // Gerar documentos
   $("#generateDoc").click(function () {
     if (!checkimputs()) return;
@@ -123,39 +73,21 @@ $(document).ready(function () {
     let nome, crm, especialidade, endereco, telefone, bairro, cidade, cep,
         rg, numero, data, valor, complemento, nomesocial, cpf, rua;
 
-    if ($("#fisica").hasClass("inactive")) { // PJ
-      nome = $("#razaoSocial").val();
-      crm = $("#crmPJ").val();
-      especialidade = $("#especialidadePJ").val();
-      rua = $("#rua").val();
-      endereco = $("#enderecoPJ").val();
-      telefone = $("#telefonePJ").val();
-      bairro = $("#bairro_pj").val();
-      cidade = $("#cidade_pj").val();
-      cep = $("#cep_pj").val();
-      numero = $("#numero_pj").val();
-      complemento = $("#complemento_pj").val();
-      cpf = $("#cnpj").val();
-      rg = "";
-      nomesocial = $("#razaoSocial").val();
-      data = $("#data_pj").val();
-    } else { // PF
-      rua = $("#rua").val();
-      nome = $("#nameform").val();
-      crm = $("#crm").val();
-      especialidade = $("#especialidade").val();
-      endereco = $("#endereco").val();
-      telefone = $("#telefone").val();
-      bairro = $("#bairro").val();
-      complemento = $("#complemento").val();
-      cidade = $("#cidade").val();
-      cep = $("#cep").val();
-      rg = $("#rg").val();
-      numero = $("#numero").val();
-      cpf = $("#cpf").val();
-      nomesocial = $("#nome_social").val();
-      data = $("#data").val();
-    }
+    rua = $("#rua").val();
+    nome = $("#nameform").val();
+    crm = $("#crm").val();
+    especialidade = $("#especialidade").val();
+    endereco = $("#endereco").val();
+    telefone = $("#telefone").val();
+    bairro = $("#bairro").val();
+    complemento = $("#complemento").val();
+    cidade = $("#cidade").val();
+    cep = $("#cep").val();
+    rg = $("#rg").val();
+    numero = $("#numero").val();
+    cpf = $("#cpf").val();
+    nomesocial = $("#nome_social").val();
+    data = $("#data").val();
 
     if (isdebug) { // Dados de teste
       nome = nomesocial = "José Minelli";
@@ -262,31 +194,17 @@ $(document).ready(function () {
     gerarPDF("assets/requisicao.png", 210, 297, "downloadBtn3", "requisicao.pdf", function (ctx3) {
       ctx3.font = "bold 30px Arial";
       ctx3.fillStyle = "black";
-      if (ispf) {
-        ctx3.fillText(nome, 200, 360);
-        ctx3.fillText(nomesocial, 200, 420);
-        ctx3.fillText(crm, 200, 490);
-        ctx3.fillText(especialidade, 500, 490);
-        ctx3.fillText(telefone, 1100, 490);
-        ctx3.fillText(rua, 200, 560);
-        ctx3.fillText(numero, 1100, 560);
-        ctx3.fillText(complemento, 1300, 560);
-        ctx3.fillText(cidade, 200, 630);
-        ctx3.fillText(bairro, 760, 630);
-        ctx3.fillText(cep, 1300, 630);
-      } else {
-        ctx3.fillText(nome, 200, 750);
-        ctx3.fillText(cpf, 1100, 750);
-        ctx3.fillText(crm, 200, 955);
-        ctx3.fillText(especialidade, 500, 955);
-        ctx3.fillText(telefone, 1100, 955);
-        ctx3.fillText(rua, 200, 815);
-        ctx3.fillText(numero, 1100, 815);
-        ctx3.fillText(complemento, 1300, 815);
-        ctx3.fillText(cidade, 200, 890);
-        ctx3.fillText(bairro, 760, 890);
-        ctx3.fillText(cep, 1300, 890);
-      }
+      ctx3.fillText(nome, 200, 360);
+      ctx3.fillText(nomesocial, 200, 420);
+      ctx3.fillText(crm, 200, 490);
+      ctx3.fillText(especialidade, 500, 490);
+      ctx3.fillText(telefone, 1100, 490);
+      ctx3.fillText(rua, 200, 560);
+      ctx3.fillText(numero, 1100, 560);
+      ctx3.fillText(complemento, 1300, 560);
+      ctx3.fillText(cidade, 200, 630);
+      ctx3.fillText(bairro, 760, 630);
+      ctx3.fillText(cep, 1300, 630);
       let dataFormatada3 = new Date(data);
       ctx3.fillText(`${dataFormatada3.getDate()}/${(dataFormatada3.getMonth()+1).toString().padStart(2,'0')}/${dataFormatada3.getFullYear()}`, 200, 2140);
       ctx3.font = "bold 25px Arial";
@@ -321,9 +239,8 @@ function checkimputs() {
   if (isdebug) return true;
 
   let allFieldsFilled = true;
-  let activeForm = ispj ? "#pjFields" : "#pfFields";
 
-  $(activeForm).find("input[required], select[required]").each(function () {
+  $("#pfFields").find("input[required], select[required]").each(function () {
     if ($(this).val().trim() === "") {
       allFieldsFilled = false;
       $(this).addClass("error");
