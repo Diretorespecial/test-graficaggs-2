@@ -57,11 +57,6 @@
         <form action="index.html" method="post">
           <h1>Formulário de Receituários</h1>
 
-          <div class="personType">
-            <button type="button" id="fisica">Pessoa Física</button>
-            <button type="button" class="inactive" id="juridica">Pessoa Jurídica</button>
-          </div>
-
           <fieldset>
             <legend><span class="number"></span>Tipo de Receituário</legend>
             <div class="radioDiv">
@@ -146,62 +141,6 @@
                   <input type="date" class="data" id="data" name="data" required />
                 </div>
               </div>
-
-              <div id="pjFields">
-                <!-- Campos Pessoa Jurídica -->
-                <div class="input-group">
-                  <label for="razao_social">Razão Social:</label>
-                  <input type="text" id="razaoSocial" name="razao_social" required />
-                </div>
-                <div class="input-group">
-                  <label for="cnpj">CNPJ:</label>
-                  <input type="text" id="cnpj" name="cnpj" required />
-                </div>
-                <div class="input-group">
-                  <label for="telefone_pj">Telefone:</label>
-                  <input type="text" id="telefonePJ" name="telefone_pj" required />
-                </div>
-                <div class="input-group">
-                  <label for="rua">Rua/Av:</label>
-                  <input type="text" id="rua" name="rua" required />
-                </div>
-                <div class="input-group">
-                  <label for="numero_pj">Número:</label>
-                  <input type="text" id="numero_pj" name="numero_pj" required />
-                </div>
-                <div class="input-group">
-                  <label for="complemento_pj">Complemento:</label>
-                  <input type="text" id="complemento_pj" name="complemento_pj" />
-                </div>
-                <div class="input-group">
-                  <label for="cidade_pj">Cidade:</label>
-                  <input type="text" id="cidade_pj" name="cidade_pj" required />
-                </div>
-                <div class="input-group">
-                  <label for="bairro_pj">Bairro:</label>
-                  <input type="text" id="bairro_pj" name="bairro_pj" required />
-                </div>
-                <div class="input-group">
-                  <label for="cep_pj">CEP:</label>
-                  <input type="text" id="cep_pj" name="cep_pj" required />
-                </div>
-                <div class="input-group">
-                  <label for="crm_pj">CRM / CRMV / CRO <span>(identificar tipo)</span> :</label>
-                  <input type="text" id="crmPJ" name="crm_pj" required />
-                </div>
-                <div class="input-group">
-                  <label for="especialidade_pj">Especialidade Médica:</label>
-                  <input type="text" id="especialidadePJ" name="especialidade_pj" required />
-                </div>
-                <div class="input-group">
-                  <label for="endereco_pj">Endereço:</label>
-                  <input type="text" class="endereco" id="enderecoPJ" name="endereco_pj" required />
-                </div>
-                <div class="input-group">
-                  <label for="data">Data:</label>
-                  <input type="date" class="data" id="data_pj" name="data_pj" required />
-                </div>
-              </div>
             </div>
           </fieldset>
 
@@ -263,5 +202,3 @@
     <script src="js/main.js"></script>
   </body>
 </html>
-
-
